@@ -9,12 +9,13 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+# Subdir Templates
+TEMPLATES_DIRS = os.path.join(BASE_DIR, "templates")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -36,7 +37,15 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    'django.contrib.sites',
     "django.contrib.staticfiles",
+    # Allauth - authentication
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    # Providers (allauth)
+    "allauth.socialaccount.providers.linkedin_oauth2",
+    "allauth.socialaccount.providers.github",
 ]
 
 MIDDLEWARE = [
@@ -54,7 +63,7 @@ ROOT_URLCONF = "dj_oauth2.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [TEMPLATES_DIRS],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -98,6 +107,51 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+
+# Authentication Backend
+AUTHENTICATION_BACKENDS = [
+    # Needed to log-in by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+
+# Sites
+
+SITE_ID = 1
+
+
+# ALLAUTH
+
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_USERNAME_REQUIRED = False
+SOCIALACCOUNT_AUTO_SIGNUP = False  # to make the user fill in all required fields
+
+
+# Providers (Allauth)
+
+SOCIALACCOUNT_ADAPTER = 'allauth.socialaccount.adapter.DefaultSocialAccountAdapter'
+
+SOCIALACCOUNT_PROVIDERS = {
+    "linkedin": {
+        "SCOPE": ["r_basicprofile", "r_emailaddress"],
+        "PROFILE_FIELDS": [
+            "first-name",
+            "last-name",
+            "email-address",
+        ],
+    },
+    "github": {
+        "SCOPE": [
+            "user",
+        ],
+    },
+}
 
 
 # Internationalization
