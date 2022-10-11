@@ -29,7 +29,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-```pycon
+```shell
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
