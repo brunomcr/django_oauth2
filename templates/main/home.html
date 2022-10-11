@@ -1,0 +1,26 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% load socialaccount %}
+{% block title %} BMCR - Home {% endblock %}
+{% block content %}
+
+
+<div class="container min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="row">
+
+        {% if user.is_authenticated %}
+        <h1 class="display-4 fw-bold lh-1">Welcome, <span
+                class="display-4">{{ user.first_name }} {{ user.last_name }}</span></h1>
+        {% for provider in user.socialaccount_set.all %}
+        <p class="lead">You are authenticated with, <span class="fw-normal">{{ provider.get_provider.name }}</span>.</p>
+        {% endfor %}
+        {% else %}
+        <h1 class="display-4 fw-bold lh-1">Django Authentication: <span class="display-4">django-allauth</span></h1>
+        <p class="lead">An example of authentication with <span class="fw-normal">OAuth2</span> and <span
+                class="fw-normal">Social Account</span></p>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}
