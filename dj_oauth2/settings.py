@@ -16,6 +16,8 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 # Subdir Templates
 TEMPLATES_DIRS = os.path.join(BASE_DIR, "templates")
+# Subdir Static
+STATIC_DIR = os.path.join(BASE_DIR, "static")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -110,6 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Authentication Backend
+
 AUTHENTICATION_BACKENDS = [
     # Needed to log-in by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
@@ -124,7 +127,7 @@ AUTHENTICATION_BACKENDS = [
 SITE_ID = 1
 
 
-# ALLAUTH
+# Configurations (Allauth)
 
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
@@ -171,7 +174,19 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+STATICFILES_DIRS = [STATIC_DIR, "static"]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# Email
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
+# Redirect URL
+
+LOGIN_REDIRECT_URL = "/"
