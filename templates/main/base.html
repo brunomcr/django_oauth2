@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <title>{% block title %} {% endblock %}</title>
+    <meta charset="UTF-8">
+    <!-- Bootstrap - CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <!-- Bootstrap - JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+            crossorigin="anonymous">
+    </script>
+    <!-- Viewport Responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap - Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</head>
+
+<body class="bg-white">
+
+<!-- Collapsed Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
+
+        <!-- Brand -->
+        <a class="navbar-brand mb-2" href="{% url 'main:home' %}">bmcr</a>
+
+        <!-- Button Collapse -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
+                aria-controls="navbarMain" aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Content Collapse -->
+        <div class="collapse navbar-collapse justify-content-center" id="navbarMain">
+            <ul class="navbar-nav mb-2">
+
+                <!-- Menu - Admin -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/" role="button">
+                        Admin
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <!-- Menu - Allauth -->
+        <div class="navbar-nav justify-content-end mb-2">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="#">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'account_logout' %}">Sign Out</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'account_login' %}">Sign In</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a>
+            </li>
+            {% endif %}
+        </div>
+
+    </div>
+</nav>
+
+<!-- Block Content -->
+
+<div class="min-vh-100">
+
+    {% block content %}
+    <!-- Content Goes here -->
+    {% endblock content %}
+
+</div>
+
+<!-- Footer -->
+<footer class="d-flex flex-wrap p-3 justify-content-center text-center shadow">
+    <small class="col-4 text-muted">© 2022 bmcr, All Rights Reserved</small>
+</footer>
+
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="text-center col-lg-4 mx-auto">
+
+            <h1>{% trans "Sign Up" %}</h1>
+
+            <p>
+                {% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use
+                your
+                {{provider_name}} account to login to {{site_name}}.
+            </p>
+            <p>
+                As a final step, please complete the following form: {% endblocktrans %}
+            </p>
+
+            <form class="signup" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}">
+                {% csrf_token %}
+
+                {% if form.errors %}
+                {% for error in form.non_field_errors %}
+                <div class="alert alert-warning with-close alert-dismissible fade show">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                {% if form.email.errors %}
+                {% for error in form.email.errors %}
+                <div class="alert alert-warning with-close alert-dismissible fade show">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                {% for field in form %}
+                <div class="form-floating mb-3">
+                    <input type="email" name="email" class="form-control" id="emailD" value="{{ field.value }}" disabled>
+                    <input type="hidden" name="email" class="form-control" id="email" value="{{ field.value }}">
+                    <label for="email">Email</label>
+                </div>
+                {% endfor %}
+
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                {% endif %}
+                <button class="btn btn-success" type="submit">{% trans "Sign Up" %} &raquo;</button>
+            </form>
+
+
+
+    </div>
+</div>
+{% endblock %}

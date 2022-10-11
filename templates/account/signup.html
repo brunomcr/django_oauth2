@@ -1,0 +1,95 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+
+<div class="container my-5">
+    <div class="text-center col-lg-4 mx-auto border rounded-5">
+
+        <h1 class="display-4 fw-bold lh-1 my-4">{% trans "Sign Up" %}</h1>
+
+        <!-- Divider -->
+        <hr class="my-5 mx-5">
+
+        <!-- Social Account -->
+        <div class="socialaccount_ballot d-flex justify-content-around">
+            {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+        </div>
+
+        {% include "socialaccount/snippets/login_extra.html" %}
+
+
+        <form class="px-5 mt-5" id="signup_form" method="post"
+              action="{% url 'account_signup' %}">
+            {% csrf_token %}
+
+
+            <!-- Non Fields Errors -->
+            {% if form.errors %}
+            {% for error in form.non_field_errors %}
+            <div class="alert alert-warning with-close alert-dismissible fade show">
+                <strong>{{ error | escape }}</strong>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            <!-- Email -->
+            {% if form.email.errors %}
+            {% for error in form.email.errors %}
+            <div class="alert alert-danger with-close alert-dismissible fade show">
+                {{ error }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            <div class="form-floating mb-3">
+                <input type="text" name="email" class="form-control" id="email" placeholder="email">
+                <label for="email">Email</label>
+            </div>
+
+            <!-- Password1 Set -->
+            {% if form.password1.errors %}
+            {% for error in form.password1.errors %}
+            <div class="alert alert-danger with-close alert-dismissible fade show">
+                {{ error }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            <div class="form-floating mb-3">
+                <input type="password" name="password1" class="form-control" id="password1" placeholder="Password">
+                <label for="password1">Password</label>
+            </div>
+
+            <!-- Password2 Confirm -->
+            {% if form.password2.errors %}
+            {% for error in form.password2.errors %}
+            <div class="alert alert-danger with-close alert-dismissible fade show">
+                {{error}}
+            </div>
+            {% endfor %}
+            {% endif %}
+            <div class="form-floating mb-3">
+                <input type="password" name="password2" class="form-control" id="password2" placeholder="Password">
+                <label for="password2">Password (again)</label>
+            </div>
+
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+            {% endif %}
+
+            <button class="btn btn-primary" type="submit">{% trans "Sign Up" %} &raquo;</button>
+
+        </form>
+
+        <div class="my-4">
+            <p class="fs-6">
+                {% blocktrans %} Already have an account ? Then please
+                <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
+            </p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
