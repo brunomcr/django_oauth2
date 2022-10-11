@@ -15,7 +15,7 @@ TEMPLATES_DIRS = os.path.join(BASE_DIR, "templates")
 
 * Django Allauth settings.
 
-```pycon
+```shell
 INSTALLED_APPS = [
     # APPS already installed here
     
@@ -47,7 +47,7 @@ TEMPLATES = [
 ]
 ```
 
-```pycon
+```shell
 # Authentication Backend
 
 AUTHENTICATION_BACKENDS = [
@@ -59,13 +59,13 @@ AUTHENTICATION_BACKENDS = [
 ]
 ```
 
-```pycon
+```shell
 # Sites
 
 SITE_ID = 1
 ```
 
-```pycon
+```shell
 # Configurations (Allauth)
 
 ACCOUNT_AUTHENTICATION_METHOD = "email"
@@ -75,7 +75,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 SOCIALACCOUNT_AUTO_SIGNUP = False  # to make the user fill in all required fields
 ```
 
-```pycon
+```shell
 # Providers (Allauth)
 # Scopes define what your app can do on a user's behalf.
 
@@ -99,7 +99,7 @@ SOCIALACCOUNT_PROVIDERS = {
 
 * Email Backend settings
 
-```pycon
+```shell
 # Email
 # https://docs.djangoproject.com/en/4.1/topics/email/#console-backend
 
@@ -144,7 +144,7 @@ $ poetry run python manage.py runserver
 
 * Sites
 
-```pycon
+```shell
 # Localhost for debug purposes.
 Domain name: 127.0.0.1:8000
 Display name: 127.0.0.1:8000
@@ -152,7 +152,7 @@ Display name: 127.0.0.1:8000
 
 * Social Application
 
-```pycon
+```shell
 # A GitHub provider example.
 Provider: GitHub
 Name: 'example_GitHub'
