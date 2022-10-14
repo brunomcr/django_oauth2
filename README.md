@@ -1,6 +1,14 @@
-# Django oAuth2
+# 📘 Django OAuth2
 
 Authentication local and social accounts with oAuth2
+
+## 📑 Main technologies:
+
+```shell
+Python "3.10"
+Django "4.1.2"
+django-allauth "0.51.0"
+```
 
 ## Configurations inside project:
 
