@@ -122,11 +122,11 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 LOGIN_REDIRECT_URL = "/profile"
 ````
 
-### Templates
+### 📁 Templates
 
 Copy ``account``, ``openid``, ``socialaccount`` folders from ``allauth.templates``, than paste to your templates.
 
-## Configurations outside project
+## 🌐 Configurations outside project
 
 ### LinkedIn:
 
