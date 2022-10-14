@@ -10,9 +10,9 @@ Django "4.1.2"
 django-allauth "0.51.0"
 ```
 
-## Configurations inside project:
+## ⚙️ Configurations inside project:
 
-### Settings.py
+### 📄 Settings.py
 
 * Templates settings.
 
@@ -140,13 +140,28 @@ Link: https://github.com/settings/developers
 * Client Secret = ``YOUR_SECRET_KEY``
 * Authorized callback/redirect URLs: ``'http://127.0.0.1:8000/accounts/linkedin_oauth2/login/callback/'``
 
-### Create Super User
-
-````shell
+## 💻 How to use:
+Clone the repository:
+```shell
+$ git clone https://github.com/brunomcr/django_authentication.git
+$ cd django_authentication/
+```
+Install dependencies:
+```shell
+$ poetry install
+```
+Create a structure in the database:
+```shell
 $ poetry run python manage.py migrate
+```
+Create super user
+```shell
 $ poetry run python manage.py createsuperuser
-$ poetry run python manage.py runserver 
-````
+```
+Start the development server:
+```shell
+$ poetry run python manage.py runserver
+```
 
 ### Django Admin:
 
